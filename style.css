@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css?family=Antic Didone');
+*{
+    font-family: 'Antic Didone';
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: rgb(172, 142, 93);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.hand{
+    box-shadow: 0 0 2vmin rgba(0, 0, 0, 0.15);
+    border-radius: 2vmin;
+    padding: 3vmin;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    background-color: burlywood;
+    width: auto;
+    height: auto;
+}
+
+.dealer-hand{
+    margin-bottom: 30vmin;
+}
+
+.player-hand{
+    margin-top: 30vmin;
+}
+
+.card{
+    --cell-size:3;
+    
+    color: burlywood;
+    font-size: calc(var(--cell-size) * 2vmin);
+    margin: 0 2vmin;
+    box-shadow: 0 0 1vmin rgba(0, 0, 0, 0.15);
+    border-radius: 2vmin;
+    width: calc(var(--cell-size) * 5vmin);
+    height:  calc(var(--cell-size) * 7vmin);
+    background-color: aqua;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
