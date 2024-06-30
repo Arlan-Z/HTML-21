@@ -81,8 +81,6 @@ async function dealerTurn(){
     allCards = dealerMemory.length;
     badCards  = dealerMemory.filter(val => val > (21 - dlrPnts)).length
 
-    console.log(dealerMemory);
-
     chanceToLose = badCards / allCards;
 
     if(chanceToLose <= DEALER_RISK) {
