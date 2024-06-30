@@ -54,11 +54,19 @@ body{
     align-items: center; 
 }
 
+
 .buttons{
     display: flex;
     gap: 4vmin;
     background-color: none  ;
     margin-bottom: 1vmin;
+}
+
+.results{
+    visibility: hidden;
+    margin-bottom: 3vmin;
+    color: white;
+    text-shadow: 0 0 1vmin rgba(0, 0, 0, 0.15);
 }
 
 

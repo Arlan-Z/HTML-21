@@ -6,6 +6,8 @@ const playerHand = document.getElementById("player");
 const passBtn = document.getElementById("pass-btn"),
     pickBtn = document.getElementById("pick-btn");
 
+const resultText = document.getElementById("results");
+
 let plrPnts = 0, dlrPnts = 0;
 let isPlrPassed = false, isDlrPassed = false;
 let isPlrTurn = true;
@@ -106,5 +108,22 @@ function changeTurn(){
 
 async function results(){
     await new Promise(resolve => setTimeout(resolve, 500));
-    (21 - plrPnts) > (21 - dlrPnts) ? alert("Player Wins") : alert("Dealer Wins");
+
+    if(plrPnts > 21) {
+        gameEnd("Dealer")
+        return
+    }
+
+    if(dlrPnts > 21) {
+        gameEnd("Player")
+        return;
+    }
+
+    (21 - plrPnts) < (21 - dlrPnts) ? gameEnd("Player") : gameEnd("Dealer");
+    return;
+}
+
+function gameEnd(winner){
+    resultText.textContent = `${winner} wins!`;
+    resultText.style.visibility = 'visible'
 }
