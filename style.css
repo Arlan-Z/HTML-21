@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Antic Didone');
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
 *{
     font-family: 'Antic Didone';
     box-sizing: border-box;
@@ -7,7 +9,7 @@
 }
 
 body{
-    background-color: rgb(172, 142, 93);
+    background-color: rgb(17, 157, 208);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -22,9 +24,10 @@ body{
     display: flex;
     justify-content: center;
     align-items: center; 
-    background-color: burlywood;
+    background-color: rgb(0, 217, 255);
     width: auto;
     height: auto;
+    transition: 0.5s;
 }
 
 .dealer-hand{
@@ -38,7 +41,7 @@ body{
 .card{
     --cell-size:3;
     
-    color: burlywood;
+    color: rgb(19, 168, 195);
     font-size: calc(var(--cell-size) * 2vmin);
     margin: 0 2vmin;
     box-shadow: 0 0 1vmin rgba(0, 0, 0, 0.15);
@@ -49,4 +52,42 @@ body{
     display: flex;
     justify-content: center;
     align-items: center; 
+}
+
+.buttons{
+    display: flex;
+    gap: 4vmin;
+    background-color: none  ;
+    margin-bottom: 1vmin;
+}
+
+
+button{
+    color: white;
+    background-color: saddlebrown;
+    border: none;
+    font-family: 'Montserrat';
+    font-weight: bold;
+    font-size: 3vmin;
+    width: 12vmin;
+    height: 6vmin;
+    border-radius: 1vmin;
+    transition: 0.3s;
+    cursor: pointer;    
+}
+
+button:active{
+    transform: translateY(0.5vmin);
+}
+
+#pick-btn{
+    background-color:rgb(11, 83, 59)
+}
+
+#pick-btn:disabled, #pass-btn:disabled{
+    background-color: gray;
+}
+
+#pass-btn{
+    background-color:rgb(146, 15, 67)
 }

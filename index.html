@@ -6,21 +6,19 @@
     <title>21</title>
     <link rel="shortcut icon" href="./images/siteIcon.png">
     <link rel="stylesheet" href="./style.css">
-    <script src="./script.js" type="module"></script>
 </head>
 <body>
-    <div class="dealer-hand hand">
-        <div class="card">
-            
-        </div>
+    <div class="dealer-hand hand" id="dealer">
     </div>
-    <div class="hand">
-        <div class="card">
-            <h1>1</h1>
-        </div>
-        <div class="card">
-            <h1>1</h1>
-        </div>
+
+    <div class="buttons">
+        <button id="pick-btn" onclick="pick()">Pick</button>
+        <button id="pass-btn" onclick="pass()">Pass</button>
     </div>
+
+    <div class="hand" id="player">
+    </div>
+
+    <script src="./script.js"></script>
 </body>
 </html>
