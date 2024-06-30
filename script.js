@@ -1,8 +1,11 @@
-const deck = Array(11).fill(0).map((_, index) => index + 1).sort(() => Math.random() - 0.5);;
+let DEALER_RISK = 0;
+
+setGameSettings();
+
+const deck = Array(11).fill(0).map((_, index) => index + 1).sort(() => Math.random() - 0.5);
 
 const dealerHand = document.getElementById("dealer");
 const playerHand = document.getElementById("player");
-
 
 const passBtn = document.getElementById("pass-btn"),
     pickBtn = document.getElementById("pick-btn");
@@ -76,14 +79,12 @@ function pick(){
 async function dealerTurn(){
     await new Promise(resolve => setTimeout(resolve, 500));
 
-
     allCards = dealerMemory.length;
     badCards  = dealerMemory.filter(val => val > (21 - dlrPnts)).length
 
     chanceToLose = badCards / allCards;
-    console.log(chanceToLose);
 
-    if(chanceToLose <= 0.5) {
+    if(chanceToLose <= DEALER_RISK) {
         getCard('D')
     }
     else{
@@ -130,6 +131,11 @@ async function results(){
 
     await new Promise(resolve => setTimeout(resolve, 500));
 
+    if(plrPnts > 21 && dlrPnts > 21){
+        gameEnd("Nobody");
+        return;
+    }
+
     if(plrPnts > 21) {
         gameEnd("Dealer")
         return
@@ -147,4 +153,13 @@ async function results(){
 function gameEnd(winner){
     resultText.textContent = `${winner} wins!`;
     resultText.style.visibility = 'visible'
+}
+
+function setGameSettings(){
+    fetch('gameSettings.json')
+        .then(response => response.json())
+        .then(jsonData => {
+        DEALER_RISK = jsonData.DEALER_RISK;
+        })
+        .catch(error => console.error('Error fetching JSON:', error));
 }
