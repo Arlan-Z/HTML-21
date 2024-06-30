@@ -51,7 +51,13 @@ body{
     background-color: aqua;
     display: flex;
     justify-content: center;
-    align-items: center; 
+    align-items: center;
+    transition:0.5s;
+}
+
+.card.hidden{
+    background-color: cornsilk;
+    color: cornsilk;
 }
 
 
@@ -89,11 +95,13 @@ button:active{
 }
 
 #pick-btn{
-    background-color:rgb(11, 83, 59)
+    background-color:rgb(11, 83, 59);
 }
 
 #pick-btn:disabled, #pass-btn:disabled{
     background-color: gray;
+    color: rgb(75, 75, 75);
+    pointer-events: none;
 }
 
 #pass-btn{

@@ -3,6 +3,7 @@ const deck = Array(11).fill(0).map((_, index) => index + 1).sort(() => Math.rand
 const dealerHand = document.getElementById("dealer");
 const playerHand = document.getElementById("player");
 
+
 const passBtn = document.getElementById("pass-btn"),
     pickBtn = document.getElementById("pick-btn");
 
@@ -11,6 +12,7 @@ const resultText = document.getElementById("results");
 let plrPnts = 0, dlrPnts = 0;
 let isPlrPassed = false, isDlrPassed = false;
 let isPlrTurn = true;
+let dealerMemory = [...deck];
 
 giveCards();
 
@@ -29,12 +31,19 @@ function getCard(hand){
     card.appendChild(cardValue); 
 
     if(hand == "D"){
+        card.classList.add('hidden')
         dealerHand.appendChild(card);
         dlrPnts += value;
+        dealerMemory = dealerMemory.filter(val => val !== value);
     }
     else{
         playerHand.appendChild(card);
         plrPnts += value
+        if(plrPnts > 21) {
+            isPlrPassed = true;
+            playerHand.style.backgroundColor = '#D75555';
+            changeTurn();
+        }
 
     }
 }
@@ -66,7 +75,15 @@ function pick(){
 
 async function dealerTurn(){
     await new Promise(resolve => setTimeout(resolve, 500));
-    if(dlrPnts < 16) {
+
+
+    allCards = dealerMemory.length;
+    badCards  = dealerMemory.filter(val => val > (21 - dlrPnts)).length
+
+    chanceToLose = badCards / allCards;
+    console.log(chanceToLose);
+
+    if(chanceToLose <= 0.5) {
         getCard('D')
     }
     else{
@@ -107,6 +124,10 @@ function changeTurn(){
 }
 
 async function results(){
+    dealerHand.querySelectorAll('.card').forEach(card => {
+        card.classList.remove('hidden');
+    });
+
     await new Promise(resolve => setTimeout(resolve, 500));
 
     if(plrPnts > 21) {
