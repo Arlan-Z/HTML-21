@@ -1,6 +1,5 @@
 let DEALER_RISK = 0;
-
-setGameSettings();
+let DEALER_KNOWS_ALL = false;
 
 const deck = Array(11).fill(0).map((_, index) => index + 1).sort(() => Math.random() - 0.5);
 
@@ -17,7 +16,7 @@ let isPlrPassed = false, isDlrPassed = false;
 let isPlrTurn = true;
 let dealerMemory = [...deck];
 
-giveCards();
+setGameSettings();
 
 function getCard(hand){
     if(deck.length == 0){
@@ -49,6 +48,8 @@ function getCard(hand){
         }
 
     }
+
+    if(DEALER_KNOWS_ALL) dealerMemory = deck
 }
 
 
@@ -61,8 +62,6 @@ function giveCards(){
             getCard('D');
         }
     }
-
-    
 }
 
 function pass(){
@@ -81,6 +80,8 @@ async function dealerTurn(){
 
     allCards = dealerMemory.length;
     badCards  = dealerMemory.filter(val => val > (21 - dlrPnts)).length
+
+    console.log(dealerMemory);
 
     chanceToLose = badCards / allCards;
 
@@ -136,6 +137,11 @@ async function results(){
         return;
     }
 
+    if(plrPnts == dlrPnts){
+        gameEnd("Nobody");
+        return;
+    }
+
     if(plrPnts > 21) {
         gameEnd("Dealer")
         return
@@ -160,6 +166,13 @@ function setGameSettings(){
         .then(response => response.json())
         .then(jsonData => {
         DEALER_RISK = jsonData.DEALER_RISK;
+        DEALER_KNOWS_ALL = jsonData.DEALER_KNOWS_ALL;
         })
         .catch(error => console.error('Error fetching JSON:', error));
+
+    startGame();
+}
+
+function startGame(){
+    giveCards();
 }

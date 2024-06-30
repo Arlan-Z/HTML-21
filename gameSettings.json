@@ -1,3 +1,4 @@
 {
-    "DEALER_RISK": 0.5
+    "DEALER_RISK": 0.5,
+    "DEALER_KNOWS_ALL": false
 }
